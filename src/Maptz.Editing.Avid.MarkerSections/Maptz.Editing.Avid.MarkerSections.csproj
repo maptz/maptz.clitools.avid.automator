@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+       
+    <PackageReference Include="Maptz.Editing.Avid.Markers" Version="0.0.13" />
+    <PackageReference Include="Maptz.TimeCode.Base" Version="0.0.14" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.5" />
+  </ItemGroup>
+
+</Project>

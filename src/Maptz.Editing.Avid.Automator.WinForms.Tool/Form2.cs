@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsInput;
 
 namespace Maptz.Editing.Avid.Automator.WinForms.Tool
 {
@@ -38,7 +39,9 @@ namespace Maptz.Editing.Avid.Automator.WinForms.Tool
             MarkersReader = markersReader;
         }
 
-        private async void button2_Click(object sender, EventArgs e)
+      
+
+            private async void button2_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(this.Model.FilePath))
             {

@@ -54,12 +54,12 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(128, 559);
-            this.button2.Name = "button2";
+            this.button2.Name = "button3";
             this.button2.Size = new System.Drawing.Size(416, 76);
             this.button2.TabIndex = 2;
             this.button2.Text = "Start";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form2
             // 
@@ -81,5 +81,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }

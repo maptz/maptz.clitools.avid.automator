@@ -1,66 +1,53 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Media;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsHook;
 using WindowsInput;
 
-namespace Maptz.Editing.Avid.Automator.WinForms.Tool
+namespace Maptz.Avid.Automation.Tool
 {
-    public partial class Form1 : Form
+
+    public class BTR : BackgroundTaskRunner
     {
-        public Form1()
+        public BTR(SoundService soundService, OutputWriter  outputWriter)
         {
-            InitializeComponent();
+            SoundService = soundService;
+            OutputWriter = outputWriter;
         }
 
-        private async void button3_Click(object sender, EventArgs e)
+        protected override async Task OnCompleted(bool hasCancelled)
         {
-
-
+            OutputWriter.WriteLine($"Task completed. Was cancelled {hasCancelled}");
+            SoundService.Play(SoundServiceSound.End);
+            await base.OnCompleted(hasCancelled);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        protected override async Task<bool> OnStarting()
         {
-            UpdateMousePos();
-
-            /*
-             * 
-             * T
-             * Ctrl+A
-             * Shift+2
-             * B
-             * Esc
-             * Ctrl+Shift+A
-             * 8
-             * S
-             * T
-             */
+            OutputWriter.WriteLine("Starting task.");
+            SoundService.Play(SoundServiceSound.Start);
+            return await base.OnStarting();   
         }
 
-        public async Task UpdateMousePos()
-        {
-            while (this.Enabled)
-            {
-                var pos = Win32.GetMousePosition();
-                this.label1.Text = pos.ToString();
-                await Task.Delay(100);
-            }
+        public SoundService SoundService { get; }
+        public OutputWriter OutputWriter { get; }
 
-        }
-
-        private async void button1_Click(object sender, EventArgs e)
+        public override async Task<bool> DoInLoopAsync()
         {
-            await Task.Delay(2000);
+            OutputWriter.WriteLine("Do something");
 
             var KeyWaitMs = 200;
 
-            
+
 
             var length = 10;
             var isim = new InputSimulator();
@@ -129,17 +116,9 @@ namespace Maptz.Editing.Avid.Automator.WinForms.Tool
 
                 await Task.Delay(3000);
             }
-            //2
 
-            //Setup state is no in out V1 selected
-
-
-
-        
-
-
-            //SendKeys.Send(send);
-
+            return false;
         }
+
     }
 }

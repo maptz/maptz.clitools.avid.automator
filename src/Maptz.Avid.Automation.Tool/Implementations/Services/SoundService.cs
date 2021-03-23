@@ -14,6 +14,9 @@ using WindowsHook;
 namespace Maptz.Avid.Automation.Tool
 {
 
+    /// <summary>
+    /// NOTE Main should be an STAThread
+    /// </summary>
     public class SoundService : ISoundService
     {
         private Dictionary<SoundServiceSound, SoundPlayer> SoundPlayers { get; }

@@ -23,9 +23,6 @@ namespace Maptz.Editing.Avid.MarkerSections
         {
             List<Section> sections = new List<Section>();
             Section lastSection = null;
-
-            
-            Console.WriteLine($"Found {markers.Count()} markers.");
             var orderedMarkers = markers.OrderBy(p => p.Timecode);
                 
             foreach (var marker in orderedMarkers)
@@ -43,8 +40,6 @@ namespace Maptz.Editing.Avid.MarkerSections
                     lastSection.Out = tc.Add(TimeCode.FromSeconds(this.Settings.SectionDurationSeconds, this.Settings.FrameRate));
                 }
             }
-
-            Console.WriteLine($"Created {sections.Count()} sections.");
             return sections;
         }
 

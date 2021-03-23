@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,7 +13,6 @@ using WindowsInput.Native;
 
 namespace Maptz.Avid.Automation.Tool
 {
-
     public class MarkerSectionPuller : BackgroundTaskRunner
     {
         /* #region Private Methods */
@@ -24,7 +24,6 @@ namespace Maptz.Avid.Automation.Tool
                 if (char.IsNumber(key))
                 {
                     var send = "{NUM" + key + "}";
-                    Console.WriteLine("Sending " + send);
 
                     var isim = new InputSimulator();
                     var i = 96 + int.Parse(key.ToString());
@@ -46,7 +45,7 @@ namespace Maptz.Avid.Automation.Tool
                 if (char.IsNumber(key))
                 {
                     var send = "{NUM" + key + "}";
-                    Console.WriteLine("Sending " + send);
+
                     //SendKeys.Send(send);
                     var isim = new InputSimulator();
                     var i = 96 + int.Parse(key.ToString());
@@ -107,18 +106,25 @@ namespace Maptz.Avid.Automation.Tool
             {
                 throw new ArgumentException($"File does not exist at path '{Settings.FilePath}'.");
             }
+
             var markers = await this.MarkersReader.ReadFromTextFileAsync(Settings.FilePath);
             var sections = this.MarkerMerger.Merge(markers);
+            OutputWriter.WriteLine($"Merging markers: {markers.Count()} markers -> {sections.Count()} sections.");
             await TypeSections(sections);
-            return false;
+            return true;
         }
         public async Task TypeSections(IEnumerable<Section> sections)
         {
+            var sectionNum = 0;
             foreach (var section in sections)
             {
+                sectionNum++;
+                OutputWriter.WriteLine($"Typing section {sectionNum} of {sections.Count()}.");
+                Console.Title = $"Maptz Avid Automation Tool ({sectionNum} of {sections.Count()})" ;
                 await this.TypeSection(section);
                 if (CancellationTokenSource.IsCancellationRequested) break;
             }
+            Console.Title = $"Maptz Avid Automation Tool";
         }
         /* #endregion Public Methods */
     }

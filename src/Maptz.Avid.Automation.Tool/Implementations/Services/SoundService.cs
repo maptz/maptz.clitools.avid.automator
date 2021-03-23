@@ -13,7 +13,8 @@ using System.Windows.Forms;
 using WindowsHook;
 namespace Maptz.Avid.Automation.Tool
 {
-    public class SoundService : IDisposable
+
+    public class SoundService : ISoundService
     {
         private Dictionary<SoundServiceSound, SoundPlayer> SoundPlayers { get; }
 

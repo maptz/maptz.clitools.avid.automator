@@ -14,24 +14,24 @@ using WindowsHook;
 namespace Maptz.Avid.Automation.Tool
 {
 
-    public class KeyboardListener
+    public class KeyboardListener : IKeyboardListener
     {
 
-        public KeyboardListener(BTR backgrounder, OutputWriter outputWriter)
+        public KeyboardListener(IBackgroundTaskRunner backgrounder, IOutputWriter outputWriter)
         {
             Backgrounder = backgrounder;
             OutputWriter = outputWriter;
         }
         private IKeyboardMouseEvents m_GlobalHook;
 
-        private BTR Backgrounder { get; }
-        public OutputWriter OutputWriter { get; }
+        private IBackgroundTaskRunner Backgrounder { get; }
+        public IOutputWriter OutputWriter { get; }
 
         private void StartBackgrounder()
         {
             OutputWriter.WriteLine("Starting backgrounder");
             if (Backgrounder.IsRunning) { return; }
-            Backgrounder.Start().GetAwaiter();
+            Backgrounder.StartAsync().GetAwaiter();
         }
 
         private void StopBackgrounder()
@@ -44,6 +44,9 @@ namespace Maptz.Avid.Automation.Tool
         public void Subscribe()
         {
 
+            OutputWriter.WriteLine("Open the Avid, and bring it to the foreground.");
+            OutputWriter.WriteLine("Press Alt+A to begin the background typing event.");
+            OutputWriter.WriteLine("To cancel the event, press Alt+B.");
             // Note: for the application hook, use the Hook.AppEvents() instead
 
             m_GlobalHook = Hook.GlobalEvents();
@@ -57,8 +60,6 @@ namespace Maptz.Avid.Automation.Tool
 
             m_GlobalHook.MouseDownExt += GlobalHookMouseDownExt;
             m_GlobalHook.KeyPress += GlobalHookKeyPress;
-
-
         }
 
         private void GlobalHookKeyPress(object sender, WindowsHook.KeyPressEventArgs e)

@@ -14,25 +14,25 @@ using WindowsHook;
 namespace Maptz.Avid.Automation.Tool
 {
 
-    public abstract class BackgroundTaskRunner
+    public abstract class BackgroundTaskRunner : IBackgroundTaskRunner
     {
         public CancellationTokenSource CancellationTokenSource { get; private set; }
 
         public BackgroundTaskRunner()
         {
-        
+
         }
 
-        
 
-        public async Task Start()
+
+        public async Task StartAsync()
         {
-            
+
             if (CancellationTokenSource != null)
             {
                 throw new NotImplementedException();
             }
-            
+
             var cts = new CancellationTokenSource();
             this.CancellationTokenSource = cts;
             var token = CancellationTokenSource.Token;
@@ -41,9 +41,9 @@ namespace Maptz.Avid.Automation.Tool
             var hasCancelled = await OnStarting();
 
             var doExit = hasCancelled;
-            while(!doExit)
+            while (!doExit)
             {
-                var isComplete = await DoInLoopAsync();
+                var isComplete = await RunAsync();
                 await Task.Delay(200);
                 hasCancelled = token.IsCancellationRequested;
                 doExit |= isComplete || token.IsCancellationRequested;
@@ -74,7 +74,7 @@ namespace Maptz.Avid.Automation.Tool
             CancellationTokenSource.Cancel();
         }
 
-        public abstract Task<bool> DoInLoopAsync();
-        
+        public abstract Task<bool> RunAsync();
+
     }
 }

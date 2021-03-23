@@ -4,7 +4,8 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 namespace Maptz.Avid.Automation.Tool
 {
-    public class OutputWriter
+
+    public class OutputWriter : IOutputWriter
     {
         public void WriteLine(string str)
         {

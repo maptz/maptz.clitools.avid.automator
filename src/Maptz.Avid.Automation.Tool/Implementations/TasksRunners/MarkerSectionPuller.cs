@@ -13,10 +13,10 @@ using WindowsInput.Native;
 
 namespace Maptz.Avid.Automation.Tool
 {
-    public class MarkerSectionPuller : BackgroundTaskRunner
+    public class MarkerSectionPuller 
     {
         /* #region Private Methods */
-        private async Task TypeSection(Section section)
+        private async Task TypeSection(Section section, CancellationToken cancellationToken)
         {
             var keyWaitMs = Settings.KeyWaitMs;
             foreach (var key in section.In.ToString())
@@ -32,13 +32,13 @@ namespace Maptz.Avid.Automation.Tool
                     //SendKeys.Send(send);
                     await Task.Delay(keyWaitMs);
                 }
-                if (CancellationTokenSource.IsCancellationRequested) return;
+                if (cancellationToken.IsCancellationRequested) return;
             }
             SendKeys.Send("{ENTER}");
             await Task.Delay(keyWaitMs);
             SendKeys.Send("i");
             await Task.Delay(keyWaitMs);
-            if (CancellationTokenSource.IsCancellationRequested) return;
+            if (cancellationToken.IsCancellationRequested) return;
 
             foreach (var key in section.Out.ToString())
             {
@@ -53,7 +53,7 @@ namespace Maptz.Avid.Automation.Tool
                     isim.Keyboard.KeyPress(vk);
                     await Task.Delay(keyWaitMs);
                 }
-                if (CancellationTokenSource.IsCancellationRequested) return;
+                if (cancellationToken.IsCancellationRequested) return;
             }
             SendKeys.Send("{ENTER}");
             await Task.Delay(keyWaitMs);
@@ -61,22 +61,11 @@ namespace Maptz.Avid.Automation.Tool
             await Task.Delay(keyWaitMs);
             await Task.Delay(keyWaitMs);
             SendKeys.Send("b");
-            if (CancellationTokenSource.IsCancellationRequested) return;
+            if (cancellationToken.IsCancellationRequested) return;
         }
         /* #endregion Private Methods */
         /* #region Protected Methods */
-        protected override async Task OnCompleted(bool hasCancelled)
-        {
-            OutputWriter.WriteLine($"Task completed. Was cancelled {hasCancelled}");
-            SoundService.Play(SoundServiceSound.End);
-            await base.OnCompleted(hasCancelled);
-        }
-        protected override async Task<bool> OnStarting()
-        {
-            OutputWriter.WriteLine("Starting task.");
-            SoundService.Play(SoundServiceSound.Start);
-            return await base.OnStarting();
-        }
+     
         /* #endregion Protected Methods */
         /* #region Public Properties */
         public IMarkerMerger MarkerMerger { get; }
@@ -96,7 +85,7 @@ namespace Maptz.Avid.Automation.Tool
         }
         /* #endregion Public Constructors */
         /* #region Public Methods */
-        public override async Task<bool> RunAsync()
+        public async Task<bool> RunAsync(CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(Settings.FilePath))
             {
@@ -107,13 +96,41 @@ namespace Maptz.Avid.Automation.Tool
                 throw new ArgumentException($"File does not exist at path '{Settings.FilePath}'.");
             }
 
-            var markers = await this.MarkersReader.ReadFromTextFileAsync(Settings.FilePath);
-            var sections = this.MarkerMerger.Merge(markers);
-            OutputWriter.WriteLine($"Merging markers: {markers.Count()} markers -> {sections.Count()} sections.");
-            await TypeSections(sections);
+            IEnumerable<Section> sections;
+            if (Settings.Mode == PullMode.Markers)
+            {
+                var markers = await this.MarkersReader.ReadFromTextFileAsync(Settings.FilePath);
+                sections = this.MarkerMerger.Merge(markers);
+                OutputWriter.WriteLine($"Merging markers: {markers.Count()} markers -> {sections.Count()} sections.");
+            }
+            else if (Settings.Mode == PullMode.AvidDS)
+            {
+                var converter = new AvidDSToSectionsConverter();
+                sections = converter.Convert(Settings.FilePath, SmpteFrameRate.Smpte25);
+                OutputWriter.WriteLine($"Reading DS sections: {sections.Count()} sections.");
+            }
+            else throw new NotSupportedException();
+
+            OutputWriter.WriteLine("Starting task.");
+            SoundService.Play(SoundServiceSound.Start);
+
+            await TypeSections(sections, cancellationToken);
+
+            var hasCancelled = cancellationToken.IsCancellationRequested;
+            if (!hasCancelled)
+            {
+                OutputWriter.WriteLine($"Task completed.");
+            }
+            else
+            {
+                OutputWriter.WriteLine($"Task cancelled.");
+            }
+            
+            SoundService.Play(SoundServiceSound.End);
+
             return true;
         }
-        public async Task TypeSections(IEnumerable<Section> sections)
+        public async Task TypeSections(IEnumerable<Section> sections, CancellationToken cancellationToken)
         {
             var sectionNum = 0;
             foreach (var section in sections)
@@ -121,8 +138,8 @@ namespace Maptz.Avid.Automation.Tool
                 sectionNum++;
                 OutputWriter.WriteLine($"Typing section {sectionNum} of {sections.Count()}.");
                 Console.Title = $"Maptz Avid Automation Tool ({sectionNum} of {sections.Count()})" ;
-                await this.TypeSection(section);
-                if (CancellationTokenSource.IsCancellationRequested) break;
+                await this.TypeSection(section, cancellationToken);
+                if (cancellationToken.IsCancellationRequested) break;
             }
             Console.Title = $"Maptz Avid Automation Tool";
         }

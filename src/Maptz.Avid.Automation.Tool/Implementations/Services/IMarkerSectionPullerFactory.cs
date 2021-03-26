@@ -17,11 +17,9 @@ using System.Windows.Forms;
 using WindowsHook;
 namespace Maptz.Avid.Automation.Tool
 {
-    public interface IWorkEngine
+
+    public interface IMarkerSectionPullerFactory
     {
-        bool IsRunning { get; }
-        public void Start(PullMode mode);
-        public void Stop();
-        public void SelectFile();
+        MarkerSectionPuller Create(PullMode mode, string filePath);
     }
 }

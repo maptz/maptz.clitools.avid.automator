@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maptz.Editing.Avid.MarkerSections", "Maptz.Editing.Avid.MarkerSections\Maptz.Editing.Avid.MarkerSections.csproj", "{665198F6-3CE1-44A7-9255-2446C047F7B4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maptz.Editing.Avid.DS", "..\..\..\netcorelibs\maptz.editing.avid\src\Maptz.Editing.Avid.DS\Maptz.Editing.Avid.DS.csproj", "{88D068B5-248D-4F69-991D-65046C8AF953}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,17 @@ Global
 		{665198F6-3CE1-44A7-9255-2446C047F7B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{665198F6-3CE1-44A7-9255-2446C047F7B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{665198F6-3CE1-44A7-9255-2446C047F7B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88D068B5-248D-4F69-991D-65046C8AF953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88D068B5-248D-4F69-991D-65046C8AF953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88D068B5-248D-4F69-991D-65046C8AF953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88D068B5-248D-4F69-991D-65046C8AF953}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{665198F6-3CE1-44A7-9255-2446C047F7B4} = {DDB7C86B-8EF0-4F36-A0CD-CB1C883FB471}
+		{88D068B5-248D-4F69-991D-65046C8AF953} = {DDB7C86B-8EF0-4F36-A0CD-CB1C883FB471}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC897F97-AC22-4777-937D-8671F5E2656B}

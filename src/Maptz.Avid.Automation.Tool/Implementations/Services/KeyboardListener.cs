@@ -36,9 +36,10 @@ namespace Maptz.Avid.Automation.Tool
 
             OutputWriter.WriteLine("=============================================");
             OutputWriter.WriteLine("Open the Avid, and bring it to the foreground.");
-            OutputWriter.WriteLine("Alt+D - Select a marker file.");
-            OutputWriter.WriteLine("Alt+A - Begin background typing.");
-            OutputWriter.WriteLine("Alt+B - Cancel background typing.");
+            OutputWriter.WriteLine("Alt+F - Select a file (marker or DS).");
+            OutputWriter.WriteLine("Alt+A - Begin pulling sections from DS File.");
+            OutputWriter.WriteLine("Alt+B - Begin pulling sections from Marker File.");
+            OutputWriter.WriteLine("Alt+C - Cancel background typing.");
             OutputWriter.WriteLine("=============================================");
             // Note: for the application hook, use the Hook.AppEvents() instead
 
@@ -46,9 +47,10 @@ namespace Maptz.Avid.Automation.Tool
 
             var map = new Dictionary<Combination, Action>
             {
-                { Combination.FromString("Alt+A"), () =>{ WorkEngine.Start();  }},
-                { Combination.FromString("Alt+B"), () =>{ WorkEngine.Stop();  }},
-                { Combination.FromString("Alt+D"), () =>{ WorkEngine.SelectFile();  }},
+                { Combination.FromString("Alt+A"), () =>{ WorkEngine.Start(PullMode.AvidDS);  }},
+                { Combination.FromString("Alt+B"), () =>{ WorkEngine.Start(PullMode.Markers);  }},
+                { Combination.FromString("Alt+C"), () =>{ WorkEngine.Stop();  }},
+                { Combination.FromString("Alt+F"), () =>{ WorkEngine.SelectFile();  }},
             };
             m_GlobalHook.OnCombination(map);
 

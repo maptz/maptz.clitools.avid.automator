@@ -57,23 +57,21 @@ namespace Maptz.Avid.Automation.Tool
             }
         }
 
-        public void Start()
+        public void Start(PullMode mode)
         {
             if (string.IsNullOrEmpty(FilePath))
             {
                 SelectFile();
             }
-            var markerSectionPuller = new MarkerSectionPuller(
-                ServiceProvider.GetRequiredService<ISoundService>(),
-                ServiceProvider.GetRequiredService<IOutputWriter>(),
-                ServiceProvider.GetRequiredService<IMarkersReader>(),
-                ServiceProvider.GetRequiredService<IMarkerMerger>(),
-                Options.Create<MarkerSectionPullerSettings>(new MarkerSectionPullerSettings
-                {
-                    FilePath = FilePath
-                }));
+
+            var markerSectionPuller = ServiceProvider.GetRequiredService<IMarkerSectionPullerFactory>().Create(mode, FilePath);
+            var backgroundTask = new BackgroundTaskRunner(async ct =>
+            {
+                await markerSectionPuller.RunAsync(ct);
+                return true;
+            });
             FilePath = string.Empty;
-            TaskQueue.Enqueue(markerSectionPuller);
+            TaskQueue.Enqueue(backgroundTask);
 
             if (!IsRunning)
             {

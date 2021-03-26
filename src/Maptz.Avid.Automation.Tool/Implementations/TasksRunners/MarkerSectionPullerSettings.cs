@@ -19,8 +19,14 @@ using WindowsInput;
 using WindowsInput.Native;
 namespace Maptz.Avid.Automation.Tool
 {
+    public enum PullMode
+    {
+        Markers, AvidDS
+    }
+
     public class MarkerSectionPullerSettings
     {
+        public PullMode Mode { get; set; } = PullMode.Markers;
         public string FilePath { get; set; }
         public int KeyWaitMs { get; set; } = 150;
     }

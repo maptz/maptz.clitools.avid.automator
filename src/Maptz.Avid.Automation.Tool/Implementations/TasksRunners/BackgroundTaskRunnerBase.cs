@@ -13,12 +13,27 @@ using System.Windows.Forms;
 using WindowsHook;
 namespace Maptz.Avid.Automation.Tool
 {
+    public class BackgroundTaskRunner : BackgroundTaskRunnerBase
+    {
+        public BackgroundTaskRunner(Func<CancellationToken, Task<bool>> action)
+        {
+            Action = action;
+        }
 
-    public abstract class BackgroundTaskRunner : IBackgroundTaskRunner
+        public Func<CancellationToken, Task<bool>> Action { get; }
+
+        public override async Task<bool> RunAsync()
+        {
+            await Action.Invoke(CancellationTokenSource.Token);
+            return true;
+        }
+    }
+
+    public abstract class BackgroundTaskRunnerBase : IBackgroundTaskRunner
     {
         public CancellationTokenSource CancellationTokenSource { get; private set; }
 
-        public BackgroundTaskRunner()
+        public BackgroundTaskRunnerBase()
         {
 
         }

@@ -16,7 +16,7 @@ using WindowsInput;
 namespace Maptz.Avid.Automation.Tool
 {
 
-    public class LoopingTyperRunner : BackgroundTaskRunner
+    public class LoopingTyperRunner : BackgroundTaskRunnerBase
     {
         public LoopingTyperRunner(SoundService soundService, OutputWriter  outputWriter)
         {

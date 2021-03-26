@@ -28,7 +28,8 @@ namespace Maptz.Avid.Automation.Tool
                 //Markers file path
                 settings.FilePath = string.Empty;
             });
-            sc.AddSingleton<IBackgroundTaskRunner, MarkerSectionPuller>();
+
+            sc.AddTransient<IMarkerSectionPullerFactory, MarkerSectionPullerFactory>();
             sc.AddSingleton<ISoundService, SoundService>();
             sc.AddSingleton<IKeyboardListener, KeyboardListener>();
             sc.AddSingleton<IOutputWriter, OutputWriter>();

@@ -50,6 +50,7 @@ namespace Maptz.Avid.Automation.Tool
                 { Combination.FromString("Alt+A"), () =>{ WorkEngine.Start(PullMode.AvidDS);  }},
                 { Combination.FromString("Alt+B"), () =>{ WorkEngine.Start(PullMode.Markers);  }},
                 { Combination.FromString("Alt+C"), () =>{ WorkEngine.Stop();  }},
+                { Combination.FromString("Alt+D"), () =>{ WorkEngine.RepeatInsert();  }},
                 { Combination.FromString("Alt+F"), () =>{ WorkEngine.SelectFile();  }},
             };
             m_GlobalHook.OnCombination(map);

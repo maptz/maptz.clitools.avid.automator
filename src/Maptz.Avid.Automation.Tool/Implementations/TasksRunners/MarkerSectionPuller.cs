@@ -13,11 +13,13 @@ using WindowsInput.Native;
 
 namespace Maptz.Avid.Automation.Tool
 {
-    public class MarkerSectionPuller 
+
+    public class MarkerSectionPuller
     {
         /* #region Private Methods */
         private async Task TypeSection(Section section, CancellationToken cancellationToken)
         {
+
             var keyWaitMs = Settings.KeyWaitMs;
             foreach (var key in section.In.ToString())
             {
@@ -65,7 +67,7 @@ namespace Maptz.Avid.Automation.Tool
         }
         /* #endregion Private Methods */
         /* #region Protected Methods */
-     
+
         /* #endregion Protected Methods */
         /* #region Public Properties */
         public IMarkerMerger MarkerMerger { get; }
@@ -125,7 +127,7 @@ namespace Maptz.Avid.Automation.Tool
             {
                 OutputWriter.WriteLine($"Task cancelled.");
             }
-            
+
             SoundService.Play(SoundServiceSound.End);
 
             return true;
@@ -137,7 +139,7 @@ namespace Maptz.Avid.Automation.Tool
             {
                 sectionNum++;
                 OutputWriter.WriteLine($"Typing section {sectionNum} of {sections.Count()}.");
-                Console.Title = $"Maptz Avid Automation Tool ({sectionNum} of {sections.Count()})" ;
+                Console.Title = $"Maptz Avid Automation Tool ({sectionNum} of {sections.Count()})";
                 await this.TypeSection(section, cancellationToken);
                 if (cancellationToken.IsCancellationRequested) break;
             }

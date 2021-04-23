@@ -59,6 +59,10 @@ namespace Maptz.Avid.Automation.Tool
 
         public void Start(PullMode mode)
         {
+            if (IsRunning)
+            {
+                return;
+            }
             if (string.IsNullOrEmpty(FilePath))
             {
                 SelectFile();
@@ -99,6 +103,23 @@ namespace Maptz.Avid.Automation.Tool
                 await Task.Delay(200);
             }
             IsRunning = false;
+        }
+
+        public void RepeatInsert()
+        {
+            var patternRepeater = new PatternRepeater();
+            var backgroundTask = new BackgroundTaskRunner(async ct =>
+            {
+                await patternRepeater.RunAsync(ct);
+                return true;
+            });
+            FilePath = "repeater";
+            TaskQueue.Enqueue(backgroundTask);
+
+            if (!IsRunning)
+            {
+                DoDequeueLoop().GetAwaiter();
+            }
         }
     }
 }

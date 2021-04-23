@@ -23,5 +23,6 @@ namespace Maptz.Avid.Automation.Tool
         public void Start(PullMode mode);
         public void Stop();
         public void SelectFile();
+        void RepeatInsert();
     }
 }

@@ -15,7 +15,8 @@ namespace Maptz.Avid.Automation.Tool
         [STAThread]
         static void Main(string[] args)
         {
-            
+
+            ///TODO Should we be using https://github.com/MediatedCommunications/WindowsInput
             AllocConsole();
             //See https://github.com/topstarai/WindowsHook
 

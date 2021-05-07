@@ -58,7 +58,17 @@ namespace Maptz.Avid.Automation.Tool
             var doExit = hasCancelled;
             while (!doExit)
             {
-                var isComplete = await RunAsync();
+                var isComplete = false;
+                try
+                {
+                    isComplete = await RunAsync();
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    throw new Exception("Error running background task", ex);
+                }
+                
                 await Task.Delay(200);
                 hasCancelled = token.IsCancellationRequested;
                 doExit |= isComplete || token.IsCancellationRequested;

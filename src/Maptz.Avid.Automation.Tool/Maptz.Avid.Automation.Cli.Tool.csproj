@@ -4,7 +4,9 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <Version>1.0.1</Version>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>mavid</ToolCommandName>
+    <Version>1.0.2</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="InputSimulator" Version="1.0.4" />

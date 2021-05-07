@@ -91,7 +91,15 @@ namespace Maptz.Avid.Automation.Tool
                 if (CurrentTask == null)
                 {
                     CurrentTask = TaskQueue.Dequeue();
-                    CurrentTask.StartAsync().GetAwaiter();
+                    try
+                    {
+                        CurrentTask.StartAsync().GetAwaiter();
+                    }
+                    catch(Exception ex)
+                    {
+                        throw new Exception("Error running queue", ex);
+                    }
+                    
                 }
                 else
                 {

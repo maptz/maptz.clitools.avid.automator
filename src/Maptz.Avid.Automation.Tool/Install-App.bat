@@ -1,3 +1,3 @@
 @ECHO OFF
 cd /d %~dp0
-mcode publish app
+mcode publish app --force

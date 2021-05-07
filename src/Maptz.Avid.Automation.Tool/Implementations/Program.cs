@@ -37,9 +37,13 @@ namespace Maptz.Avid.Automation.Tool
             sc.AddTransient<IMarkersReader, MarkersReader>();
             sc.AddTransient<IMarkerMerger, MarkerMerger>();
             sc.Configure<MarkerMergerSettings>(Configuration.GetSection("MarkerMerger"));
+            sc.Configure<MarkerMergerSettings>(settings=>
+            {
+                settings.FrameRate = SmpteFrameRate.Smpte2997NonDrop;
+            });
             sc.AddTransient<IWorkEngine, WorkEngine>();
 
-
+             
             var sp = sc.BuildServiceProvider();
 
             var ow = sp.GetRequiredService<IOutputWriter>();

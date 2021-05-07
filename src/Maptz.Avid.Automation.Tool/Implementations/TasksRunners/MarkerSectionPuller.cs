@@ -101,7 +101,19 @@ namespace Maptz.Avid.Automation.Tool
             IEnumerable<Section> sections;
             if (Settings.Mode == PullMode.Markers)
             {
-                var markers = await this.MarkersReader.ReadFromTextFileAsync(Settings.FilePath);
+                OutputWriter.WriteLine($"Reading markers from file");
+                IEnumerable<Marker> markers;
+                try
+                {
+                    markers = await this.MarkersReader.ReadFromTextFileAsync(Settings.FilePath);
+                }
+                catch(Exception ex)
+                {
+                    OutputWriter.WriteLine($"Error: " + ex.ToString());
+                    return false;
+                }
+                
+                OutputWriter.WriteLine($"Merging markers");
                 sections = this.MarkerMerger.Merge(markers);
                 OutputWriter.WriteLine($"Merging markers: {markers.Count()} markers -> {sections.Count()} sections.");
             }
@@ -141,7 +153,11 @@ namespace Maptz.Avid.Automation.Tool
                 OutputWriter.WriteLine($"Typing section {sectionNum} of {sections.Count()}.");
                 Console.Title = $"Maptz Avid Automation Tool ({sectionNum} of {sections.Count()})";
                 await this.TypeSection(section, cancellationToken);
-                if (cancellationToken.IsCancellationRequested) break;
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    Console.WriteLine("Canncellation requested");
+                    break;
+                }
             }
             Console.Title = $"Maptz Avid Automation Tool";
         }

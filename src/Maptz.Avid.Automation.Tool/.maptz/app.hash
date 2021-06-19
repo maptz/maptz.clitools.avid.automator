@@ -1,25 +1,28 @@
 
 X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\appsettings.json-234c7de6187078710c19a33a3c67b82a
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Concepts\IBackgroundTaskRunner.cs-319f69772cb901a42a949edf44c09af9
 X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Concepts\IKeyboardListener.cs-1b7b204d15d2c7241508eab59f89063c
 X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Concepts\IOutputWriter.cs-7cd6184a062bb348a69b7da17531f8b0
 X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Concepts\ISoundService.cs-901c445a0679acc28df683d65a2fa8d7
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Concepts\IWorkEngine.cs-7c88091ac5476c6985075c666dd28273
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Concepts\SoundServiceSound.cs-7cf9fb35e2c21dc004dda8ed438b54ba
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\Program.cs-645ec6c824be3db34fb8b9a7240fbccb
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\Services\IMarkerSectionPullerFactory.cs-69b92886567f7c222248d3d9a4f2c988
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\Services\KeyboardListener.cs-c7547eef415e0aba4b906cb90758fe21
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\Services\MarkerSectionPullerFactory.cs-90edbd7e33a08d1b8e5cdb6db71445bb
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Concepts\SoundServiceSound.cs-baf7fd8fd9efd7156e607dad92731421
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Concepts\IBackgroundTaskRunner.cs-1332c0bc53c1c170d0aacb27ff82aca0
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Concepts\IWorkEngine.cs-57fb9fdcf1f9203f6e83dbf8d0090880
 X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\Services\OutputWriter.cs-160e0946ae07085c5a4d87e9a3957fb1
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\Services\SoundService.cs-7561004c72c1bb3cd1fb6547a631965c
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\Services\WorkEngine.cs-c3498097f95bbffb612a2c50c616982b
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\TasksRunners\BackgroundTaskRunnerBase.cs-258e6182de4649241fce988bcd209931
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\TasksRunners\IMarkerSectionPuller.cs-91aa0add89d4feddba31c0eb22567765
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\TasksRunners\LoopingTyperRunner.cs-a2cbe963f8f90c9fc81a5f764c988c9d
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\TasksRunners\MarkerSectionPuller.cs-ae99431a17ca59050e5c1b07dfe6cdf6
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\TasksRunners\MarkerSectionPullerSettings.cs-cb41f57742aa801795dba0693a134271
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\Services\SoundService.cs-f17698d633d73f37cc3b366c62173a10
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\Services\KeyboardListener.cs-79fc853fb8c553f0e7941dcf7ef64ae9
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\Services\WorkEngine.cs-b71b657d019b87d5d6459cc3b6867469
 X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\TasksRunners\PatternRepeater.cs-3242bdc068a01f93e63bfec69ddbc3d3
-X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Maptz.Avid.Automation.Cli.Tool.csproj-5f93ec0be2058e211a11cdd18c10a3b3
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\TasksRunners\FileSectionPullerSettings.cs-0257c19d1946254d60a72c06ebb6adbd
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\TasksRunners\FileSectionPuller.cs-89770a56b80e079df7221d49e5892ff7
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\TasksRunners\BackgroundTaskRunnerBase.cs-71a21bb21d43fc91feb463cb9328c5bc
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Implementations\Program.cs-58968a0401d14372c35ba382f11812c9
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Properties\launchSettings.json-ce2a6f51d1b2f07c3227782840d7cfe1
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\OLD\IMarkerSectionPuller.cs-91aa0add89d4feddba31c0eb22567765
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\OLD\MarkerSectionPuller.cs-0c0cd176213577402771e2d14d1114c0
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\OLD\MarkerSectionPullerSettings.cs-cb41f57742aa801795dba0693a134271
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\OLD\IMarkerSectionPullerFactory.cs-69b92886567f7c222248d3d9a4f2c988
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\OLD\MarkerSectionPullerFactory.cs-90edbd7e33a08d1b8e5cdb6db71445bb
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\OLD\LoopingTyperRunner.cs-5b2903f9b57ab20c9efd590442061874
+X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Avid.Automation.Tool\Maptz.Avid.Automation.Cli.Tool.csproj-f9341d31be39ec73f3c7bd9688c64e28
 
 DEPENDENCY:X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\src\Maptz.Editing.Avid.MarkerSections\Maptz.Editing.Avid.MarkerSections.csproj
 
@@ -27,3 +30,6 @@ END_DEPENDENCY:X:\+++DEV\MaptzGitHub\netcoretools\maptz.clitools.avid.automator\
 DEPENDENCY:X:\+++DEV\MaptzGitHub\netcorelibs\maptz.editing.avid\src\Maptz.Editing.Avid.DS\Maptz.Editing.Avid.DS.csproj
 
 END_DEPENDENCY:X:\+++DEV\MaptzGitHub\netcorelibs\maptz.editing.avid\src\Maptz.Editing.Avid.DS\Maptz.Editing.Avid.DS.csproj
+DEPENDENCY:X:\+++DEV\MaptzGitHub\netcorelibs\maptz.editing.avid\src\Maptz.Editing.Avid.Markers\Maptz.Editing.Avid.Markers.csproj
+
+END_DEPENDENCY:X:\+++DEV\MaptzGitHub\netcorelibs\maptz.editing.avid\src\Maptz.Editing.Avid.Markers\Maptz.Editing.Avid.Markers.csproj

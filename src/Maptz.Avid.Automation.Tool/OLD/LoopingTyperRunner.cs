@@ -41,11 +41,10 @@ namespace Maptz.Avid.Automation.Tool
         public SoundService SoundService { get; }
         public OutputWriter OutputWriter { get; }
 
-        public override async Task<bool> RunAsync()
+        public override async Task<bool> RunAsync(CancellationToken ct)
         {
             OutputWriter.WriteLine("Do something");
 
-            var KeyWaitMs = 200;
 
             var length = 10;
             var isim = new InputSimulator();

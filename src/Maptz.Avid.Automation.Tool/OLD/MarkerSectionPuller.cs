@@ -107,12 +107,12 @@ namespace Maptz.Avid.Automation.Tool
                 {
                     markers = await this.MarkersReader.ReadFromTextFileAsync(Settings.FilePath);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     OutputWriter.WriteLine($"Error: " + ex.ToString());
                     return false;
                 }
-                
+
                 OutputWriter.WriteLine($"Merging markers");
                 sections = this.MarkerMerger.Merge(markers);
                 OutputWriter.WriteLine($"Merging markers: {markers.Count()} markers -> {sections.Count()} sections.");

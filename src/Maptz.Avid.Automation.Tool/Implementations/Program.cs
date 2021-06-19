@@ -14,54 +14,38 @@ namespace Maptz.Avid.Automation.Tool
 
     class Program
     {
-        static void DoApp()
+        static void StartListen()
         {
+
             ///TODO Should we be using https://github.com/MediatedCommunications/WindowsInput
             AllocConsole();
             //See https://github.com/topstarai/WindowsHook
-
             IConfiguration Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", false, false)
           .Build();
-
             var sc = new ServiceCollection();
-            sc.Configure<MarkerSectionPullerSettings>(settings =>
-            {
-                //Markers file path
-                settings.FilePath = string.Empty;
-            });
-
-            sc.AddTransient<IMarkerSectionPullerFactory, MarkerSectionPullerFactory>();
             sc.AddSingleton<ISoundService, SoundService>();
             sc.AddSingleton<IKeyboardListener, KeyboardListener>();
             sc.AddSingleton<IOutputWriter, OutputWriter>();
-            sc.AddTransient<IMarkersReader, MarkersReader>();
-            sc.AddTransient<IMarkerMerger, MarkerMerger>();
-            sc.Configure<MarkerMergerSettings>(Configuration.GetSection("MarkerMerger"));
-            sc.Configure<MarkerMergerSettings>(settings =>
-            {
-                settings.FrameRate = SmpteFrameRate.Smpte2997NonDrop;
-            });
             sc.AddTransient<IWorkEngine, WorkEngine>();
-
-
             var sp = sc.BuildServiceProvider();
-
             var ow = sp.GetRequiredService<IOutputWriter>();
             var kl = sp.GetRequiredService<IKeyboardListener>();
-            Console.Title = "Maptz Avid Automation Tool";
+            //Console.Title = "Maptz Avid Automation Tool";
             ow.WriteLine("Maptz Avid Automation Tool");
+            Console.WriteLine("Hello 2");
             kl.Subscribe();
-
             Application.Run(new ApplicationContext());
-
             kl.Unsubscribe();
-
             sp.Dispose();
         }
 
 
-        static async Task Start(string[] args)
+        static void Start(string[] args)
         {
+            //To insert filler, run the 'listen' command. 
+            //Then start typing with Alt+A, stop with Alt+C.
+
+
             var app = new CommandLineApplication();
             app.Name = "ConsoleArgs";
             app.Description = ".NET Core console app with argument parsing.";
@@ -70,8 +54,17 @@ namespace Maptz.Avid.Automation.Tool
 
             app.OnExecute(() =>
             {
-                DoApp();
                 return 0;
+            });
+
+            app.Command("listen", command =>
+            {
+                command.OnExecute(() =>
+                {
+                    Console.Title = "Avid Automator";
+                    StartListen();
+                    return 0;
+                });
             });
 
 
@@ -80,9 +73,13 @@ namespace Maptz.Avid.Automation.Tool
                 var inputFilePathOption = command.Option("-i|--input", "Some option value", CommandOptionType.SingleValue);
                 command.Description = "This is the description for simple-command.";
                 command.HelpOption("-?|-h|--help");
-                command.OnExecute(async () =>
+                command.OnExecute(() =>
                 {
-                    await DoFile(inputFilePathOption.Value());
+                    ///TODO Should we be using https://github.com/MediatedCommunications/WindowsInput
+                    //See https://github.com/topstarai/WindowsHook
+                    AllocConsole();
+                    //Currently this just pulls from a simple text file. Could be made to be more sophisticated. 
+                    PullFromFile(inputFilePathOption.Value());
                     return 0;
                 });
             });
@@ -90,17 +87,47 @@ namespace Maptz.Avid.Automation.Tool
             app.Execute(args);
         }
 
-        private static async Task DoFile(string filePath)
+        private static void PullFromFile(string filePath)
         {
-            await Task.Delay(3000);
+            var sc = new ServiceCollection();
+            sc.Configure<FileSectionPullerSettings>(settings =>
+            {
+            });
+
+            sc.AddSingleton<ISoundService, SoundService>();
+            sc.AddSingleton<IKeyboardListener, KeyboardListener>();
+            sc.AddSingleton<IOutputWriter, OutputWriter>();
+            sc.AddTransient<FileSectionPuller>();
+
+            var sp = sc.BuildServiceProvider();
+
+            var fsp = sp.GetRequiredService<FileSectionPuller>();
+            var totalSeconds = 5;
+            Console.WriteLine($"Waiting {totalSeconds}s");
+            var ss = sp.GetRequiredService<ISoundService>();
+            for (int i = 0; i < totalSeconds; i++)
+            {
+                ss.Play(SoundServiceSound.LeadIn);
+                Task.Delay(1000).GetAwaiter().GetResult();
+            }
+            ss.Play(SoundServiceSound.Start);
+            Task.Delay(1000).GetAwaiter().GetResult();
+            fsp.PullFromFile(filePath);
+            ss.Play(SoundServiceSound.End);
+            Task.Delay(1000).GetAwaiter().GetResult();
         }
 
         [STAThread]
         static void Main(string[] args)
         {
-            DoApp();
+            //NOTE - An issue with a Windows Forms console application.  See https://github.com/dotnet/sdk/issues/13331#issuecomment-693002436
+            // <OutputType>Exe</OutputType> Value is Exe not WinExe
+            //<DisableWinExeOutputInference > true </ DisableWinExeOutputInference >
+
+            Console.WriteLine("Hello");
+            //DoApp();
             //await Task.CompletedTask;
-            //await Start(args);
+            Start(args);
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]

@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 namespace Maptz.Avid.Automation.Tool
 {
@@ -9,7 +10,7 @@ namespace Maptz.Avid.Automation.Tool
         /* #endregion Public Properties */
         /* #region Public Methods */
         void Cancel();
-        Task<bool> RunAsync();
+        Task<bool> RunAsync(CancellationToken ct);
         Task StartAsync();
         /* #endregion Public Methods */
     }

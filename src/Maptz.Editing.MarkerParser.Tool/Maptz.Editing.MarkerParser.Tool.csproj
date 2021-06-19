@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.40.0" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.21216.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\netcorelibs\maptz.editing.avid\src\Maptz.Editing.Avid.Markers\Maptz.Editing.Avid.Markers.csproj" />
+    <ProjectReference Include="..\Maptz.Editing.Avid.MarkerSections\Maptz.Editing.Avid.MarkerSections.csproj" />
+  </ItemGroup>
+
+</Project>

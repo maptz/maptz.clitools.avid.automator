@@ -15,5 +15,5 @@ namespace Maptz.Avid.Automation.Tool
 {
 
 
-    public enum SoundServiceSound { Start, End }
+    public enum SoundServiceSound { LeadIn, Start, End }
 }

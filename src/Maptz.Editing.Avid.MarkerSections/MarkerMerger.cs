@@ -24,7 +24,7 @@ namespace Maptz.Editing.Avid.MarkerSections
             List<Section> sections = new List<Section>();
             Section lastSection = null;
             var orderedMarkers = markers.OrderBy(p => p.Timecode);
-                
+
             foreach (var marker in orderedMarkers)
             {
                 var tc = new TimeCode(marker.Timecode, this.Settings.FrameRate);

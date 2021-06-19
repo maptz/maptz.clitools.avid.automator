@@ -30,7 +30,8 @@ namespace Maptz.Avid.Automation.Tool
 
         private void Initialize()
         {
-            SoundPlayers.Add(SoundServiceSound.Start, new SoundPlayer(@"C:\Windows\Media\Speech Misrecognition.wav"));
+            SoundPlayers.Add(SoundServiceSound.LeadIn, new SoundPlayer(@"C:\Windows\Media\Speech Misrecognition.wav"));
+            SoundPlayers.Add(SoundServiceSound.Start, new SoundPlayer(@"C:\Windows\Media\Speech Sleep.wav"));
             SoundPlayers.Add(SoundServiceSound.End, new SoundPlayer(@"C:\Windows\Media\Speech Disambiguation.wav"));
         }
 

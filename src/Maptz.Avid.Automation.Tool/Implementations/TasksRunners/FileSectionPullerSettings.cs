@@ -1,26 +1,21 @@
 using Maptz.Editing.Avid.Markers;
 using Maptz.Editing.Avid.MarkerSections;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Media;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsHook;
+using WindowsInput;
+using WindowsInput.Native;
 namespace Maptz.Avid.Automation.Tool
 {
-    public interface IWorkEngine
+
+    public class FileSectionPullerSettings
     {
-        bool IsRunning { get; }
-        void Start();
-        void Stop();
+        
+        public int KeyWaitMs { get; set; } = 50;
     }
 }

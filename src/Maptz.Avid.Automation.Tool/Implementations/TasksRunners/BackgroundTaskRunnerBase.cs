@@ -22,9 +22,9 @@ namespace Maptz.Avid.Automation.Tool
 
         public Func<CancellationToken, Task<bool>> Action { get; }
 
-        public override async Task<bool> RunAsync()
+        public override async Task<bool> RunAsync(CancellationToken ct)
         {
-            await Action.Invoke(CancellationTokenSource.Token);
+            await Action.Invoke(ct);
             return true;
         }
     }
@@ -61,7 +61,7 @@ namespace Maptz.Avid.Automation.Tool
                 var isComplete = false;
                 try
                 {
-                    isComplete = await RunAsync();
+                    isComplete = await RunAsync(token);
                 }
                 catch(Exception ex)
                 {
@@ -99,7 +99,7 @@ namespace Maptz.Avid.Automation.Tool
             CancellationTokenSource.Cancel();
         }
 
-        public abstract Task<bool> RunAsync();
+        public abstract Task<bool> RunAsync(CancellationToken ct);
 
     }
 }

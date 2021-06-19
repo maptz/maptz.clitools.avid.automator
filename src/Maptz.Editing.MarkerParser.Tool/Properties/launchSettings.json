@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Maptz.Editing.MarkerParser.Tool": {
+      "commandName": "Project",
+      "commandLineArgs": "directory -i \"C:\\Users\\steph\\OneDrive\\Desktop\\20210614\""
+    }
+  }
+}

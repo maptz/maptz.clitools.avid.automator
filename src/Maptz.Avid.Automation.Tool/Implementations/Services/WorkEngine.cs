@@ -31,20 +31,7 @@ namespace Maptz.Avid.Automation.Tool
         private IBackgroundTaskRunner CurrentTask { get; set; }
         public IOutputWriter OutputWriter { get; }
         public IServiceProvider ServiceProvider { get; }
-        public string FilePath { get; private set; }
 
-        public void SelectFile()
-        {
-            OutputWriter.WriteLine("Selecting file.");
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Markers file";
-            var result = ofd.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                FilePath = ofd.FileName;
-                OutputWriter.WriteLine($"File selected '{FilePath}'.");
-            }
-        }
 
         public bool IsRunning { get; private set; }
         public void Stop()
@@ -57,24 +44,23 @@ namespace Maptz.Avid.Automation.Tool
             }
         }
 
-        public void Start(PullMode mode)
+        public void Start()
         {
             if (IsRunning)
             {
                 return;
             }
-            if (string.IsNullOrEmpty(FilePath))
-            {
-                SelectFile();
-            }
-
-            var markerSectionPuller = ServiceProvider.GetRequiredService<IMarkerSectionPullerFactory>().Create(mode, FilePath);
+            
+            //var looper = ServiceProvider.GetRequiredService<LoopingTyperRunner>();
+            var patternRepeater = new PatternRepeater();
+            var soundService = new SoundService();
             var backgroundTask = new BackgroundTaskRunner(async ct =>
             {
-                await markerSectionPuller.RunAsync(ct);
+                soundService.Play(SoundServiceSound.Start);
+                await patternRepeater.RunAsync(ct);
+                soundService.Play(SoundServiceSound.End);
                 return true;
             });
-            FilePath = string.Empty;
             TaskQueue.Enqueue(backgroundTask);
 
             if (!IsRunning)
@@ -113,21 +99,6 @@ namespace Maptz.Avid.Automation.Tool
             IsRunning = false;
         }
 
-        public void RepeatInsert()
-        {
-            var patternRepeater = new PatternRepeater();
-            var backgroundTask = new BackgroundTaskRunner(async ct =>
-            {
-                await patternRepeater.RunAsync(ct);
-                return true;
-            });
-            FilePath = "repeater";
-            TaskQueue.Enqueue(backgroundTask);
-
-            if (!IsRunning)
-            {
-                DoDequeueLoop().GetAwaiter();
-            }
-        }
+       
     }
 }

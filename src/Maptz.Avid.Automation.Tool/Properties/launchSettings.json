@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Maptz.Avid.Automation.Cli.Tool": {
+      "commandName": "Project",
+      "commandLineArgs": "file -i \"C:\\Users\\steph\\OneDrive\\Desktop\\20210614\\TAN - ARCHIVES - LAFFAY LINEUP.PT006.out.txt\""
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Maptz.Editing.SectionParser.Tool": {
+      "commandName": "Project",
+      "commandLineArgs": "file -i \"C:\\Users\\steph\\OneDrive\\Desktop\\20210709\\BOTERO PULL\\BOTERO PULL PREP.edl\""
+    }
+  }
+}

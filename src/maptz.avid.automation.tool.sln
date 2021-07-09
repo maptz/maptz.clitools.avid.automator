@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maptz.Editing.Avid.Markers"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maptz.Editing.MarkerParser.Tool", "Maptz.Editing.MarkerParser.Tool\Maptz.Editing.MarkerParser.Tool.csproj", "{0B67B151-7E32-42E9-92E1-9AD9018ECC54}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maptz.Editing.Edl", "..\..\..\netcorelibs\maptz.editing.base\src\Maptz.Editing.Edl\Maptz.Editing.Edl.csproj", "{96477693-C6FD-453C-8B28-F165DE2CA4BF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maptz.Editing.SectionParser.Tool", "Maptz.Editing.SectionParser.Tool\Maptz.Editing.SectionParser.Tool.csproj", "{BAAF76EC-6C35-45EB-81C7-782DEC066767}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,14 @@ Global
 		{0B67B151-7E32-42E9-92E1-9AD9018ECC54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B67B151-7E32-42E9-92E1-9AD9018ECC54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B67B151-7E32-42E9-92E1-9AD9018ECC54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96477693-C6FD-453C-8B28-F165DE2CA4BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96477693-C6FD-453C-8B28-F165DE2CA4BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96477693-C6FD-453C-8B28-F165DE2CA4BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96477693-C6FD-453C-8B28-F165DE2CA4BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAAF76EC-6C35-45EB-81C7-782DEC066767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAAF76EC-6C35-45EB-81C7-782DEC066767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAAF76EC-6C35-45EB-81C7-782DEC066767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAAF76EC-6C35-45EB-81C7-782DEC066767}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,6 +61,7 @@ Global
 		{665198F6-3CE1-44A7-9255-2446C047F7B4} = {DDB7C86B-8EF0-4F36-A0CD-CB1C883FB471}
 		{88D068B5-248D-4F69-991D-65046C8AF953} = {DDB7C86B-8EF0-4F36-A0CD-CB1C883FB471}
 		{6C7172A7-15C4-4EDB-811D-F7B4A27AFE46} = {DDB7C86B-8EF0-4F36-A0CD-CB1C883FB471}
+		{96477693-C6FD-453C-8B28-F165DE2CA4BF} = {DDB7C86B-8EF0-4F36-A0CD-CB1C883FB471}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC897F97-AC22-4777-937D-8671F5E2656B}

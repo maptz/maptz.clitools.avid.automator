@@ -50,9 +50,10 @@ namespace Maptz.Avid.Automation.Tool
             {
                 return;
             }
-            
+
             //var looper = ServiceProvider.GetRequiredService<LoopingTyperRunner>();
-            var patternRepeater = new PatternRepeater();
+            //var patternRepeater = new PatternRepeater();
+            var patternRepeater = new ComplexPatternRepeater();
             var soundService = new SoundService();
             var backgroundTask = new BackgroundTaskRunner(async ct =>
             {

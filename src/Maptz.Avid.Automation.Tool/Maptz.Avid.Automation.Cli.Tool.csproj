@@ -24,6 +24,7 @@
     <Folder Include="Implementations\TasksRunners\Base\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\netcorelibs\maptz.editing.base\src\Maptz.Editing.Edl\Maptz.Editing.Edl.csproj" />
     <ProjectReference Include="..\Maptz.Editing.Avid.MarkerSections\Maptz.Editing.Avid.MarkerSections.csproj" />
   </ItemGroup>
   <ItemGroup>

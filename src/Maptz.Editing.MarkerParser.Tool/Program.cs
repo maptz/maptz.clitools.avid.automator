@@ -10,6 +10,14 @@ using System.Threading.Tasks;
 
 namespace Maptz.Editing.MarkerParser.Tool
 {
+    class EdlToSectionParser
+    {
+        public void ParseSections(string edlFilePath, string outputFilePath)
+        {
+
+        }
+    }
+
 
     class Program
     {

@@ -1,10 +1,13 @@
 ﻿using Maptz.Editing.Avid.Markers;
 using Maptz.Editing.Avid.MarkerSections;
+using Maptz.Editing.Edl;
 using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
+using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,13 +15,13 @@ using System.Windows.Forms;
 namespace Maptz.Avid.Automation.Tool
 {
 
+    
     class Program
     {
-        static void StartListen()
+
+        private static IServiceProvider GetServiceProvider()
         {
 
-            ///TODO Should we be using https://github.com/MediatedCommunications/WindowsInput
-            AllocConsole();
             //See https://github.com/topstarai/WindowsHook
             IConfiguration Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", false, false)
           .Build();
@@ -28,6 +31,15 @@ namespace Maptz.Avid.Automation.Tool
             sc.AddSingleton<IOutputWriter, OutputWriter>();
             sc.AddTransient<IWorkEngine, WorkEngine>();
             var sp = sc.BuildServiceProvider();
+            return sp;
+        }
+
+        static void StartListen()
+        {
+
+            ///TODO Should we be using https://github.com/MediatedCommunications/WindowsInput
+            AllocConsole();
+            var sp = GetServiceProvider();
             var ow = sp.GetRequiredService<IOutputWriter>();
             var kl = sp.GetRequiredService<IKeyboardListener>();
             //Console.Title = "Maptz Avid Automation Tool";
@@ -36,12 +48,18 @@ namespace Maptz.Avid.Automation.Tool
             kl.Subscribe();
             Application.Run(new ApplicationContext());
             kl.Unsubscribe();
-            sp.Dispose();
+            (sp as IDisposable).Dispose();
         }
 
 
         static void Start(string[] args)
         {
+            //var edl = new CMX3600Deserializer(Options.Create(new CMX3600DeserializerSettings { IgnoreFps = true }));
+            //var edlText = File.ReadAllText(@"C:\Users\steph\OneDrive\Desktop\20210702\ASSEMBLIES - ACT 2.02.00.05  - ARCH VID.edl");
+            //var entries = edl.Read(edlText);
+            //var first = entries.Take(10).ToArray();
+            //return;
+
             //To insert filler, run the 'listen' command. 
             //Then start typing with Alt+A, stop with Alt+C.
 
@@ -57,6 +75,7 @@ namespace Maptz.Avid.Automation.Tool
                 return 0;
             });
 
+            //To begin typing, run in listen mode.
             app.Command("listen", command =>
             {
                 command.OnExecute(() =>
@@ -87,6 +106,7 @@ namespace Maptz.Avid.Automation.Tool
             app.Execute(args);
         }
 
+      
         private static void PullFromFile(string filePath)
         {
             var sc = new ServiceCollection();

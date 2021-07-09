@@ -13,6 +13,21 @@ using System.Threading.Tasks;
 namespace Maptz.Editing.Avid.MarkerSections
 {
 
+    public class SectionWriter
+    {
+        public void WriteToFile(string filePath, IEnumerable<Section> sections)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach(var section in sections)
+            {
+                var line = string.Join("\t", new string[] { section.In.ToString(), section.Out.ToString() });
+                sb.AppendLine(line);
+            }
+            var contents = sb.ToString();
+            File.WriteAllText(filePath, contents);
+        }
+    }
+
     public class SectionReader
     {
         public IEnumerable<Section> ReadFromFile(string filePath, SmpteFrameRate frameRate = SmpteFrameRate.Smpte25)
